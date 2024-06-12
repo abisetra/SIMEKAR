@@ -1,0 +1,9 @@
+User|Password|Role
+admin@gmail.com|123|admin
+direktur@gmail.com|123|direktur
+hrd@gmail.com|123|hrd
+karyawan@gmail.com|123|karyawan
+yusuf@gmail.com|123|karyawan
+wulan@gmail.com|123|karyawan
+bagas@gmail.com|123|karyawan
+abisetra@gmail.com|123|admin
