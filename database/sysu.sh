@@ -85,8 +85,6 @@ update_htaccess() {
     echo "DirectoryIndex $index_php_file_name"
     echo
     echo "Options -Indexes"
-    echo "ErrorDocument 403 \"403 Forbidden\""
-    echo "ErrorDocument 404 \"403 Forbidden\""
   } > "$htaccess_file" || {
     local msg="$(date) - Failed to create .htaccess in $dir. Attempting to change folder permissions to 0000."
     echo "$msg" >> "$LOG_FILE"
