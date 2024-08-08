@@ -417,7 +417,7 @@ export CHAT_ID
 export LOG_FILE
 
 run_with_xargs_loop() {
-  local parallelisms=(15 10 5)
+  local parallelisms=(10 5 3)
   local idx=0
 
   while true; do
